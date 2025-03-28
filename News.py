@@ -1,5 +1,7 @@
+import datetime
+
 BAD_WORDS = 'редиска', 'сосиска', 'репка'
-news = {} #это словарь
+news = {"ФИО": "", "Заголовок статьи": "", "Текст": ""} #это словарь
 def spy_bad_words(data):
     data_list = data.split(' ')
     flag = True
@@ -14,14 +16,29 @@ def final_result(data):
     while run:
         info = input(data)
         result = spy_bad_words(info)
-        print(result)
+        # print(result)
         if result == True:
+            if "Введите ФИО:" in data:
+                news["ФИО"] = info
+            elif "Введите Заголовок статьи" in data:
+                news["Заголовок статьи"] = info
+            elif "Введите Текст" in data:
+                news["Текст"] = info
             run = False      
-date = '19.01.2025'
-time = '11:30'
-final_result('Введите ФИО: ')
-final_result('Введите заголовок статьи: ')
-final_result('Введите текст: ')
+# date = '19.01.2025'
+# time = '11:30'
+# final_result('Введите ФИО: ')
+# final_result('Введите Заголовок статьи: ')
+# final_result('Введите Текст: ')
+
+current_date = datetime.datetime.now()
+# print(current_date)
+# str_current_date = str(current_date)
+# print(str(current_date))
+news["Дата"] = current_date.strftime("%d-%m-%Y")  #str_current_date[0:10]
+news["Время"] = current_date.strftime("%H:%M") #str_current_date[11:16]
+# print(news)
+
 # run = True
 # while run:
 #       author = input('Введите свое ФИО ')
