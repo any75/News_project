@@ -25,15 +25,44 @@ def spy_zero_str(data):
         flag = False
     return flag
 
+def spy_numbers_str(data):
+    flag = True
+    for i in data:
+        if i.isdigit():
+            flag = False
+            break
+    return flag
+
+def spy_double_str(data):
+    flag = True
+    data_list = data.split('-')
+    for i in data_list:
+        i = i.strip() #пересохраняем строку после применения метода strip по удалению пробелов () так как строки неизменяемый тип
+        if i.isalpha() == False:
+            flag = False
+            break    
+    return flag    
+#придумываем пароль: не менее 4 символов и минимум 1 одна цифра и одна заглавная буква:
+# def check_password(data):
+#     if len(data) >= 4
+
 
 def final_result(data):
     run = True
     while run:
-        info = input(data)
+        info = input(data) #data это аргумент функции final_result(data). При вызове функции final_result(data) в data попадает информация, 
+        #которую должен ввести пользователь (вводит пользователь). И эта информация записывается (сохраняется) в info, 
+        #иначе она нигде не сохранится после ввода пользователем. А в data хранится информация, котрую мы запрашиваем у пользователя
         result_zero = spy_zero_str(info)
         if result_zero == False:
             continue
-
+        result_numbers = spy_numbers_str(info)
+        result_double_str = spy_double_str(info)
+        if (result_numbers == False or result_double_str == False) and ("Введите Фамилию" in data or "Введите Имя" in data):
+            continue
+        # result_double_str = spy_double_str(info)
+        # if result_double_str == False and ("Введите Фамилию" in data or "Введите Имя" in data):
+        #     continue
         result = spy_bad_words(info) # В result получаем информацию о том, нет ли в info (вводимых пользователем данных) плохих слов
         #  В result попадет либо True либо False
         if result == True:
