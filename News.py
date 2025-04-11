@@ -1,6 +1,9 @@
 import datetime
+import re
 
 BAD_WORDS = 'редиска', 'сосиска', 'репка'
+regex = '^[A-ZА-ЯЁ]'
+pattern = re.compile(regex)
 registration = {"Фамилия": "", "Имя": "", "Логин": "", "Пароль": ""} 
 news = {"ФИО": "", "Заголовок статьи": "", "Текст": ""} #это словарь
 def spy_bad_words(data):
@@ -42,9 +45,41 @@ def spy_double_str(data):
             flag = False
             break    
     return flag    
-#придумываем пароль: не менее 4 символов и минимум 1 одна цифра и одна заглавная буква:
+#придумываем пароль: не менее 4 символов и минимум одна заглавная буква и 1 одна цифра:
 # def check_password(data):
-#     if len(data) >= 4
+#     count1 = 0
+#     count2 = 0
+#     if len(data) >= 4:
+#         abc = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ' + 'ZYXWVUTSRQPONMLKJIHGFEDCBA'[::-1]
+#         numbers = '0123456789'
+#         for i in abc:
+#             count1 +=1
+#             if i in data:
+#                 for j in numbers:
+#                     count2 +=1
+#                     if j in data:
+#                         print(count1, count2)
+#                         return True
+#     return False
+# print(check_password('hjhjhj9Z'))      
+              
+def check_password(data):
+    flag = False
+    if len(data) >= 4:
+        flag_letters = False
+        flag_numbers = False
+        for i in data:  
+            if i.isdigit():
+                flag_numbers = True
+            elif pattern.search(i):
+                flag_letters = True
+            if  flag_letters == True and flag_numbers == True:
+                flag = True
+                break
+    return flag
+print(check_password('1ghjhGg'))
+
+
 
 
 def final_result(data):
