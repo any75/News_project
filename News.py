@@ -68,16 +68,34 @@ def check_password(data):
     if len(data) >= 4:
         flag_letters = False
         flag_numbers = False
-        for i in data:  
-            if i.isdigit():
+        flag_double = True
+        for i in range(len(data)):
+            if data[i].isdigit():
                 flag_numbers = True
-            elif pattern.search(i):
+            elif pattern.search(data[i]):
                 flag_letters = True
-            if  flag_letters == True and flag_numbers == True:
+            if i < len(data) - 1:
+                if data[i] == data[i + 1]:
+                    print(data[i], data[i + 1]) 
+                    flag_double = False
+            if  flag_letters == True and flag_numbers == True and  flag_double == True:
                 flag = True
                 break
     return flag
-print(check_password('1ghjhGg'))
+
+
+
+
+
+            
+#
+#     print(a[i])
+#     if i < len(a) - 1:
+#         if a[i] == a[i + 1]:
+#             print(a[i], a[i + 1]) 
+
+
+print(check_password('9ZZhjhhjh99Z'))
 
 
 
