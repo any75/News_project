@@ -5,7 +5,7 @@ BAD_WORDS = 'редиска', 'сосиска', 'репка'
 regex = '^[A-ZА-ЯЁ]'
 pattern = re.compile(regex)
 registration = {"Фамилия": "", "Имя": "", "Логин": "", "Пароль": ""} 
-news = {"ФИО": "", "Заголовок статьи": "", "Текст": ""} #это словарь
+news = {"Фамилия Имя": "", "Заголовок статьи": "", "Текст": ""} #это словарь
 def spy_bad_words(data):
     '''Эта функция сначала получает информацию в переменнную data
     с помощью метода split разбивает по словам информацию, полученную в data
@@ -76,7 +76,7 @@ def check_password(data):
                 flag_letters = True
             if i < len(data) - 1:
                 if data[i] == data[i + 1]:
-                    print(data[i], data[i + 1]) 
+                    # print(data[i], data[i + 1]) 
                     flag_double = False
             if  flag_letters == True and flag_numbers == True and  flag_double == True:
                 flag = True
@@ -95,7 +95,7 @@ def check_password(data):
 #             print(a[i], a[i + 1]) 
 
 
-print(check_password('9ZZhjhhjh99Z'))
+# print(check_password('9ZZhjhhjh99Z'))
 
 
 
@@ -106,6 +106,9 @@ def final_result(data):
         info = input(data) #data это аргумент функции final_result(data). При вызове функции final_result(data) в data попадает информация, 
         #которую должен ввести пользователь (вводит пользователь). И эта информация записывается (сохраняется) в info, 
         #иначе она нигде не сохранится после ввода пользователем. А в data хранится информация, котрую мы запрашиваем у пользователя
+        result_check_password = check_password(info)
+        if result_check_password == False and "Введите Пароль" in data:
+            continue
         result_zero = spy_zero_str(info)
         if result_zero == False:
             continue
@@ -121,7 +124,7 @@ def final_result(data):
         if result == True:
             if "Введите ФИО:" in data: #если функция вызывается с аргументом, содержащим 'Введите ФИО: ', то происходит
         #запись введенных данных в словарь news с ключом ФИО
-                news["ФИО"] = info
+                news["Фамилия Имя"] = info
             elif "Введите Заголовок статьи" in data:
                 news["Заголовок статьи"] = info
             elif "Введите Текст" in data:
@@ -138,12 +141,17 @@ def final_result(data):
 # date = '19.01.2025'
 # time = '11:30'
 final_result('Введите Фамилию: ') # здесь и далее final_result(data = 'Введите Фамилию: ') запись информации в словарь - функция 
-#записывает проверенную информацию в словари news и registration
+#записывает проверенную информацию в словари news и registration. В registration записываем Фамилию, Имя, Логин, Пароль. 
+# В news записываем Введите Заголовок статьи: и Введите Текст:.
 final_result('Введите Имя: ')
 final_result('Введите Логин: ')
 final_result('Введите Пароль: ')
 print(registration)
-final_result('Введите ФИО: ') 
+login = input('Введите Логин: ')
+password = input('Введите Пароль: ')
+# сравнить пароль и логин со словарем registration
+# final_result('Введите ФИО: ') 
+news['Фамилия Имя'] = registration['Фамилия'] + ' ' + registration['Имя']
 final_result('Введите Заголовок статьи: ')
 final_result('Введите Текст: ')
 
