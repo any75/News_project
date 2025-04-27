@@ -95,9 +95,8 @@ def check_password(data):
 #             print(a[i], a[i + 1]) 
 
 
+
 # print(check_password('9ZZhjhhjh99Z'))
-
-
 
 
 def final_result(data):
