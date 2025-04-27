@@ -104,7 +104,7 @@ def final_result(data):
     while run:
         info = input(data) #data это аргумент функции final_result(data). При вызове функции final_result(data) в data попадает информация, 
         #которую должен ввести пользователь (вводит пользователь). И эта информация записывается (сохраняется) в info, 
-        #иначе она нигде не сохранится после ввода пользователем. А в data хранится информация, котрую мы запрашиваем у пользователя
+        #иначе она нигде не сохранится после ввода пользователем. А в data хранится информация, которую мы запрашиваем у пользователя
         result_check_password = check_password(info)
         if result_check_password == False and "Введите Пароль" in data:
             continue
@@ -146,9 +146,22 @@ final_result('Введите Имя: ')
 final_result('Введите Логин: ')
 final_result('Введите Пароль: ')
 print(registration)
-login = input('Введите Логин: ')
-password = input('Введите Пароль: ')
-# сравнить пароль и логин со словарем registration
+for i in range(3): #Запрос логина и пароля возможен 3 раза в случае неверного ввода или логина или пароля
+    login = input('Введите Логин: ')
+    password = input('Введите Пароль: ')
+# сравнить пароль и логин со словарем registration:
+    if login == registration['Логин']:
+        print(login, registration['Логин'])
+        if password == registration['Пароль']:
+            print('Добро пожаловать!')
+            break
+        else:
+            print('Логин или пароль введены неверно')
+    else:
+        print('Логин или пароль введены неверно')
+
+
+
 # final_result('Введите ФИО: ') 
 news['Фамилия Имя'] = registration['Фамилия'] + ' ' + registration['Имя']
 final_result('Введите Заголовок статьи: ')
