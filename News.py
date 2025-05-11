@@ -146,34 +146,34 @@ final_result('Введите Имя: ')
 final_result('Введите Логин: ')
 final_result('Введите Пароль: ')
 print(registration)
-for i in range(3): #Запрос логина и пароля возможен 3 раза в случае неверного ввода или логина или пароля
-    login = input('Введите Логин: ')
-    password = input('Введите Пароль: ')
-# сравнить пароль и логин со словарем registration:
-    if login == registration['Логин']:
-        print(login, registration['Логин'])
-        if password == registration['Пароль']:
-            print('Добро пожаловать!')
-            break
-        else:
-            print('Логин или пароль введены неверно')
-    else:
-        print('Логин или пароль введены неверно')
+# for i in range(3): #Запрос логина и пароля возможен 3 раза в случае неверного ввода или логина или пароля
+#     login = input('Введите Логин: ')
+#     password = input('Введите Пароль: ')
+# # сравнить пароль и логин со словарем registration:
+#     if login == registration['Логин']:
+#         print(login, registration['Логин'])
+#         if password == registration['Пароль']:
+#             print('Добро пожаловать!')
+#             break
+#         else:
+#             print('Логин или пароль введены неверно')
+#     else:
+#         print('Логин или пароль введены неверно')
 
 
 
-# final_result('Введите ФИО: ') 
-news['Фамилия Имя'] = registration['Фамилия'] + ' ' + registration['Имя']
-final_result('Введите Заголовок статьи: ')
-final_result('Введите Текст: ')
+# # final_result('Введите ФИО: ') 
+# news['Фамилия Имя'] = registration['Фамилия'] + ' ' + registration['Имя']
+# final_result('Введите Заголовок статьи: ')
+# final_result('Введите Текст: ')
 
-current_date = datetime.datetime.now()
-# print(current_date)
-# str_current_date = str(current_date)
-# print(str(current_date))
-news["Дата"] = current_date.strftime("%d-%m-%Y")  #str_current_date[0:10]
-news["Время"] = current_date.strftime("%H:%M") #str_current_date[11:16]
-print(news)
+# current_date = datetime.datetime.now()
+# # print(current_date)
+# # str_current_date = str(current_date)
+# # print(str(current_date))
+# news["Дата"] = current_date.strftime("%d-%m-%Y")  #str_current_date[0:10]
+# news["Время"] = current_date.strftime("%H:%M") #str_current_date[11:16]
+# print(news)
 
 # run = True
 # while run:
@@ -215,3 +215,9 @@ status = True
 #         print(f'Нашли плохое слово {i}')
 #         break
 
+file = open('database.txt', 'w')
+for key in registration:
+    file.write(key)
+    file.write(': ')
+    file.write(registration[key])
+    file.write('\n')
