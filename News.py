@@ -4,7 +4,10 @@ import re
 BAD_WORDS = 'редиска', 'сосиска', 'репка'
 regex = '^[A-ZА-ЯЁ]'
 pattern = re.compile(regex)
-registration = {"Фамилия": "", "Имя": "", "Логин": "", "Пароль": ""} 
+# registration = {"Фамилия": "", "Имя": "", "Логин": "", "Пароль": ""} пока закомментили, раньше это был простой словарь, нам не подошел
+#  так как нужно, чтобы возможно было сохранить несколько пользователей
+registration = {}
+
 news = {"Фамилия Имя": "", "Заголовок статьи": "", "Текст": ""} #это словарь
 def spy_bad_words(data):
     '''Эта функция сначала получает информацию в переменнную data
@@ -100,6 +103,7 @@ def check_password(data):
 
 
 def final_result(data):
+    global user_login
     run = True
     while run:
         info = input(data) #data это аргумент функции final_result(data). При вызове функции final_result(data) в data попадает информация, 
@@ -129,22 +133,27 @@ def final_result(data):
             elif "Введите Текст" in data:
                 news["Текст"] = info
             elif "Введите Фамилию" in data:
-                registration["Фамилия"] = info
+                registration[user_login]["Фамилия"] = info
             elif "Введите Имя" in data:
-                registration["Имя"] = info 
-            elif "Введите Логин" in data:
-                registration["Логин"] = info   
+                registration[user_login]["Имя"] = info 
+            elif "Введите Логин" in data: #делаем Логин главным ключом словаря registration
+                registration[info] = {}
+                user_login = info
             elif "Введите Пароль" in data:
-                registration["Пароль"] = info          
+                registration[user_login]["Пароль"] = info          
             run = False      
 # date = '19.01.2025'
 # time = '11:30'
-final_result('Введите Фамилию: ') # здесь и далее final_result(data = 'Введите Фамилию: ') запись информации в словарь - функция 
-#записывает проверенную информацию в словари news и registration. В registration записываем Фамилию, Имя, Логин, Пароль. 
-# В news записываем Введите Заголовок статьи: и Введите Текст:.
-final_result('Введите Имя: ')
-final_result('Введите Логин: ')
-final_result('Введите Пароль: ')
+user_login = None
+for i in range(2):
+
+    final_result('Введите Логин: ')
+    final_result('Введите Фамилию: ') # здесь и далее final_result(data = 'Введите Фамилию: ') запись информации в словарь - функция 
+    #записывает проверенную информацию в словари news и registration. В registration записываем Фамилию, Имя, Логин, Пароль. 
+    # В news записываем Введите Заголовок статьи: и Введите Текст:.
+    final_result('Введите Имя: ')
+
+    final_result('Введите Пароль: ')
 print(registration)
 # for i in range(3): #Запрос логина и пароля возможен 3 раза в случае неверного ввода или логина или пароля
 #     login = input('Введите Логин: ')
@@ -215,9 +224,9 @@ status = True
 #         print(f'Нашли плохое слово {i}')
 #         break
 
-file = open('database.txt', 'w')
-for key in registration:
-    file.write(key)
-    file.write(': ')
-    file.write(registration[key])
-    file.write('\n')
+# file = open('database.txt', 'w')
+# for key in registration:
+#     file.write(key)
+#     file.write(': ')
+#     file.write(registration[key])
+#     file.write('\n')
